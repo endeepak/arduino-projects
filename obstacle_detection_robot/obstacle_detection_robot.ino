@@ -24,7 +24,7 @@ void setup() {
 void loop() { 
   delay(50);  // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
   unsigned int distanceInCms = sonar.ping() / US_ROUNDTRIP_CM; // Send ping, get ping time in microseconds (uS) and convert it to centimeters (cm)
-  Serial.print("Distance: " + String(distanceInCms) + "cm");
+  Serial.println("Distance: " + String(distanceInCms) + "cm");
 
   if(distanceInCms != NO_ECHO && distanceInCms < MAX_DISTANCE_FROM_OBSTACLE_IN_CMS) {
     rotate_right(90);
@@ -38,14 +38,6 @@ void rotate_right(int angleInDegrees) {
     turn_right();
     delay(25); // Test this out and change it approriately based on your motor speed
   }
-}
-
-void motor_stop(){
-  digitalWrite(motor_left[0], LOW); 
-  digitalWrite(motor_left[1], LOW); 
-  
-  digitalWrite(motor_right[0], LOW); 
-  digitalWrite(motor_right[1], LOW);
 }
 
 void drive_forward() {
@@ -78,4 +70,12 @@ void turn_right() {
   
   digitalWrite(motor_right[0], LOW); 
   digitalWrite(motor_right[1], HIGH); 
+}
+
+void motor_stop(){
+  digitalWrite(motor_left[0], LOW); 
+  digitalWrite(motor_left[1], LOW); 
+  
+  digitalWrite(motor_right[0], LOW); 
+  digitalWrite(motor_right[1], LOW);
 }
